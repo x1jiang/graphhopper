@@ -14,6 +14,7 @@ graphhopper:
   # Speed mode (CH)
   profiles_ch:
     - profile: "car"
+    - profile: "truck"
 
   # Hybrid mode (LM)
   profiles_lm: []
