@@ -1,0 +1,177 @@
+// {
+//   "image": "mcr.microsoft.com/devcontainers/universal:2",
+//   "hostRequirements": {
+//     "cpus": 4
+//   },
+//   "waitFor": "onCreateCommand",
+//   "updateContentCommand": "pip install -r requirements.txt",
+//   "postCreateCommand": "",
+//   "postAttachCommand": {
+//     "server": "python app.py"
+//   },
+//   "portsAttributes": {
+//     "5000": {
+//       "label": "Application",
+//       "onAutoForward": "openPreview"
+//     }
+//   },
+//   "customizations": {
+//     "codespaces": {
+//       "openFiles": [
+//         "templates/index.html"
+//       ]
+//     },
+//     "vscode": {
+//       "extensions": [
+//         "ms-python.python"
+//       ]
+//     }
+//   },
+//   "forwardPorts": [5000]
+// }
+
+
+// {
+//   "name": "graphhopper",
+//   "build": {
+//     "dockerfile": "../Dockerfile"
+//   },
+//   "hostRequirements": {
+//     "cpus": 8,
+//     "memory": "16gb"
+//   },
+//   "overrideCommand": false,       // Allow Dockerfile's ENTRYPOINT to run
+//   "runArgs": [
+//     "--init",                     // Ensures proper signal handling
+//     "-p", "8989:8989"             // Map port 8989 from container to host
+//   ],
+//   "portsAttributes": {
+//     "8989": {
+//       "label": "GraphHopper",
+//       "onAutoForward": "openPreview"
+//     }
+//   },
+//   "forwardPorts": [8989],
+//   "postCreateCommand": "",
+//   "postStartCommand": "",
+//   "waitFor": "onCreateCommand"
+// }
+
+// {
+//   "name": "graphhopper",
+//   "build": {
+//     "dockerfile": "../Dockerfile"
+//   },
+//   "hostRequirements": {
+//     "cpus": 8,
+//     "memory": "16gb"
+//   },
+//   "overrideCommand": false,
+//   "runArgs": ["--init"],  // Optional but recommended
+//   "portsAttributes": {
+//     "8989": {
+//       "label": "GraphHopper",
+//       "onAutoForward": "openPreview"
+//     }
+//   },
+//   "forwardPorts": [8989],
+//   "postCreateCommand": "",
+//   "postStartCommand": "",
+//   "waitFor": "onCreateCommand"
+// }
+
+
+
+// {
+//   "name": "graphhopper_xj",
+//   "build": { 
+//     "dockerfile": "../Dockerfile"
+//   }, 
+//   "hostRequirements": {
+//     "cpus": 4,         // Increase CPUs to 4
+//     "memory": "8gb"    // Request 8 GB of RAM
+//   },
+//   "overrideCommand": false,
+//   "waitFor": "onCreateCommand",
+//   // "updateContentCommand": "pip install -r requirements.txt",
+//   "postCreateCommand": "",
+//   // "postAttachCommand": "python main.py",
+//   "portsAttributes": {
+//     "5000": {
+//       "label": "Application",
+//       "onAutoForward": "openPreview"
+//     }
+//   },
+//   // "customizations": {
+//   //   "codespaces": {
+//   //     "openFiles": [ 
+//   //       "templates/index.html"
+//   //     ]
+//   //   },
+//   //   "vscode": { 
+//   //     "extensions": [
+//   //       "ms-python.python"
+//   //     ]
+//   //   }
+//   // },
+//   "forwardPorts": [8989]
+// }
+
+// // devcontainer.json
+// {
+//   "name": "graphhopper",
+//   "build": {
+//     "dockerfile": "../Dockerfile"
+//   },
+//   "hostRequirements": {
+//     "cpus": 8,
+//     "memory": "16gb"
+//   },
+//   "overrideCommand": false,
+//   "runArgs": ["--init"],  // Optional but recommended
+//   "portsAttributes": {
+//     "8989": {
+//       "label": "GraphHopper",
+//       "onAutoForward": "openPreview"
+//     }
+//   },
+//   "forwardPorts": [8989],
+//   "postCreateCommand": "",
+//   "postStartCommand": "",
+//   "waitFor": "onCreateCommand"
+// }
+
+{
+  "name": "graphhopper",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "hostRequirements": {
+    "cpus": 8,
+    "memory": "16gb"
+  },
+  "overrideCommand": false,
+  "runArgs": [
+    "--init",
+    // "-p", "8989:8989",
+    // "--memory", "4g",
+    // "--memory-swap", "4g"
+  ],
+  "appPort": [ "8989:8989" ],
+  "args": [
+    "-a", "web",
+    "--url", "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
+    "-c", "config-example.yml",
+    "--host", "0.0.0.0"
+  ],
+  "portsAttributes": {
+    "8989": {
+      "label": "GraphHopper",
+      "onAutoForward": "openPreview"
+    }
+  },
+  // "forwardPorts": [8989],
+  "postCreateCommand": "",
+  "postStartCommand": "",
+  "waitFor": "onCreateCommand"
+}
